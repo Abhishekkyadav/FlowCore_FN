@@ -101,19 +101,21 @@ export default function Table({ permissions, onToggle, searchTerm, pageSize }) {
       </div>
 
       
+      
+      
       {/* Footer Meta Pagination Controls */}
       <div className="flex items-center justify-between text-[11px] text-slate-400 font-medium pt-3 px-1">
         <span>
           Showing {sortedData.length === 0 ? 0 : indexOfFirstRow + 1} to {Math.min(indexOfLastRow, sortedData.length)} of {sortedData.length} entries
         </span>
         
-        <div className="flex items-center gap-1 text-slate-600 text-[11px]">
+        <div className="flex items-center gap-2 text-[11px]">
           {/* First Button */}
           <button 
             type="button" 
             disabled={currentPage === 1} 
             onClick={() => setCurrentPage(1)} 
-            className={`px-2.5 py-1 border border-slate-200 rounded-md font-medium transition-all ${currentPage === 1 ? 'bg-slate-50 text-slate-300 cursor-not-allowed' : 'bg-white hover:bg-slate-50'}`}
+            className={`px-1 py-1 transition-all ${currentPage === 1 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-500 hover:text-indigo-600'}`}
           >
             First
           </button>
@@ -123,37 +125,35 @@ export default function Table({ permissions, onToggle, searchTerm, pageSize }) {
             type="button" 
             disabled={currentPage === 1} 
             onClick={() => setCurrentPage(currentPage - 1)} 
-            className={`px-2.5 py-1 border border-slate-200 rounded-md font-medium transition-all ${currentPage === 1 ? 'bg-slate-50 text-slate-300 cursor-not-allowed' : 'bg-white hover:bg-slate-50'}`}
+            className={`px-1 py-1 transition-all ${currentPage === 1 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-500 hover:text-indigo-600'}`}
           >
             ‹ Prev
           </button>
 
-          {/* Dynamic Number Logic */}
-          {Array.from({ length: totalPages }, (_, i) => i + 1)
-            .filter(page => page >= currentPage - 1 && page <= currentPage + 1 || page === 1 || page === totalPages)
-            .map((page, index, array) => (
-              <React.Fragment key={page}>
-                {index > 0 && array[index - 1] !== page - 1 && <span className="px-1 text-slate-300">...</span>}
-                <button
-                  type="button"
-                  onClick={() => setCurrentPage(page)}
-                  className={`w-6.5 h-6.5 flex items-center justify-center rounded-md font-bold text-xs border transition-all ${
-                    currentPage === page
-                      ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm shadow-indigo-500/20'
-                      : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
-                  }`}
-                >
-                  {page}
-                </button>
-              </React.Fragment>
+          {/* Clean Number Sequence Buttons (Direct 1 2 3 4, No dots!) */}
+          <div className="flex items-center gap-2">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                type="button"
+                onClick={() => setCurrentPage(page)}
+                className={`w-7 h-7 flex items-center justify-center rounded-lg font-bold text-xs transition-all ${
+                  currentPage === page
+                    ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-500/10' // Active solid filled state
+                    : 'text-slate-500 hover:bg-slate-100/50 hover:text-indigo-600' // Inactive numbers
+                }`}
+              >
+                {page}
+              </button>
             ))}
+          </div>
 
           {/* Next Button */}
           <button 
             type="button" 
             disabled={currentPage === totalPages || totalPages === 0} 
             onClick={() => setCurrentPage(currentPage + 1)} 
-            className={`px-2.5 py-1 border border-slate-200 rounded-md font-medium transition-all ${currentPage === totalPages || totalPages === 0 ? 'bg-slate-50 text-slate-300 cursor-not-allowed' : 'bg-white hover:bg-slate-50'}`}
+            className={`px-1 py-1 transition-all ${currentPage === totalPages || totalPages === 0 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-500 hover:text-indigo-600'}`}
           >
             Next ›
           </button>
@@ -163,7 +163,7 @@ export default function Table({ permissions, onToggle, searchTerm, pageSize }) {
             type="button" 
             disabled={currentPage === totalPages || totalPages === 0} 
             onClick={() => setCurrentPage(totalPages)} 
-            className={`px-2.5 py-1 border border-slate-200 rounded-md font-medium transition-all ${currentPage === totalPages || totalPages === 0 ? 'bg-slate-50 text-slate-300 cursor-not-allowed' : 'bg-white hover:bg-slate-50'}`}
+            className={`px-1 py-1 transition-all ${currentPage === totalPages || totalPages === 0 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-500 hover:text-indigo-600'}`}
           >
             Last
           </button>
