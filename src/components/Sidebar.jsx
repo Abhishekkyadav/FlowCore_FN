@@ -1,7 +1,9 @@
 "use client";
-
-import {
+import {useState} from "react";
+  import {
   Menu,
+  ChevronDown,
+  ChevronRight,
   Scan,
   Workflow,
   GitBranch,
@@ -21,30 +23,52 @@ import {
   History,
 } from "lucide-react";
 
-const configurationItems  = [
+const workflowItems  = [
   { name: "Workflow Type", icon: Scan },
   { name: "Workflow", icon: Workflow },
   { name: "Workflow Step", icon: Scan },
   { name: "Workflow Transition", icon: GitBranch },
+];
+const permissionItems = [
   { name: "Task Permission", icon: UserRound },
-  { name: "Document Configuration", icon: FileText },
   { name: "Assignment Rule", icon: ContactRound },
+];
+const hierarchyItems = [
   { name: "Hierarchy Node", icon: UsersRound },
   { name: "User Hierarchy Mapping", icon: Network },
   { name: "Workflow Settings", icon: Settings },
 ];
+const documentItems = [
+  { name: "Document Configuration", icon: FileText },
+];
 
-const runtimeItems = [
+const fileItems = [
   { name: "File Instance", icon: ClipboardList },
-  { name: "Task Instance", icon: SquareCheckBig },
   { name: "File Pool", icon: Database },
-  { name: "Movement History", icon: ScanLine },
   { name: "Uploaded Document", icon: FileUp },
+];
+const communicationItems = [
   { name: "Notification", icon: Bell },
   { name: "Comment", icon: MessageCircle },
+];
+const taskItems = [
+  { name: "Task Instance", icon: SquareCheckBig },
+];
+const trackingItems = [
   { name: "Audit Log", icon: History },
+   { name: "Movement History", icon: ScanLine },
 ];
 export default function Sidebar({ isOpen, onToggle}) {
+  const [workflowOpen, setWorkflowOpen] = useState(false);
+const [permissionOpen, setPermissionOpen] = useState(false);
+const [hierarchyOpen, setHierarchyOpen] = useState(false);
+const [documentOpen, setDocumentOpen] = useState(false);
+
+const [filesOpen, setFilesOpen] = useState(false);
+const [tasksOpen, setTasksOpen] = useState(false);
+const [trackingOpen, setTrackingOpen] = useState(false);
+const [communicationOpen, setCommunicationOpen] = useState(false);
+
   const renderMenuItem = (item) => {
     const Icon = item.icon;
 
@@ -76,6 +100,39 @@ export default function Sidebar({ isOpen, onToggle}) {
       </button>
     );
   };
+  const renderDropdown = (title, open, setOpen, items) => {
+  return (
+    <div className="mb-2">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="
+          flex h-[50px] w-full items-center justify-between
+          rounded-[9px] px-[17px]
+          text-left text-[#344261]
+          transition-colors duration-150
+          hover:bg-[#F6F8FC]
+        "
+      >
+        <span className="text-[16px] font-semibold">
+          {title}
+        </span>
+
+        {open ? (
+          <ChevronDown size={20} />
+        ) : (
+          <ChevronRight size={20} />
+        )}
+      </button>
+
+      {open && (
+        <div className="ml-[14px] border-l border-[#E5E9F1] pl-[8px]">
+          {items.map(renderMenuItem)}
+        </div>
+      )}
+    </div>
+  );
+};
   return (
     <>
       <aside
@@ -170,11 +227,35 @@ export default function Sidebar({ isOpen, onToggle}) {
   >
     Configuration Masters
   </p>
+<div className="flex flex-col gap-[3px]">
+  {renderDropdown(
+    "Workflow",
+    workflowOpen,
+    setWorkflowOpen,
+    workflowItems
+  )}
 
-  <nav className="flex flex-col gap-[3px]">
-    {configurationItems.map(renderMenuItem)}
-  </nav>
+  {renderDropdown(
+    "Permissions",
+    permissionOpen,
+    setPermissionOpen,
+    permissionItems
+  )}
 
+  {renderDropdown(
+    "Documents",
+    documentOpen,
+    setDocumentOpen,
+    documentItems
+  )}
+
+  {renderDropdown(
+    "Hierarchy",
+    hierarchyOpen,
+    setHierarchyOpen,
+    hierarchyItems
+  )}
+</div>
   <p
     className="
       mb-[19px] ml-[15px] mt-[39px]
@@ -185,10 +266,36 @@ export default function Sidebar({ isOpen, onToggle}) {
   >
     Runtime
   </p>
+<div className="flex flex-col gap-[3px]">
+  {renderDropdown(
+    "Files",
+    filesOpen,
+    setFilesOpen,
+    fileItems
+  )}
 
-  <nav className="flex flex-col gap-[3px]">
-    {runtimeItems.map(renderMenuItem)}
-  </nav>
+  {renderDropdown(
+    "Tasks",
+    tasksOpen,
+    setTasksOpen,
+    taskItems
+  )}
+
+  {renderDropdown(
+    "Tracking",
+    trackingOpen,
+    setTrackingOpen,
+    trackingItems
+  )}
+
+  {renderDropdown(
+    "Communication",
+    communicationOpen,
+    setCommunicationOpen,
+    communicationItems
+  )}
+</div>
+  
 </div>
 <div
   className="
