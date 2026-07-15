@@ -10,6 +10,7 @@ const initialWorkflows = [
     name: "Citizen Petition Workflow",
     workflowtype: "Petition",
     workflowcode: "PET-001",
+    version:1,
     published: "yes",
     status: true,
   },
@@ -18,6 +19,7 @@ const initialWorkflows = [
     name: "Building Permission Workflow",
     workflowtype: "Building Permission",
     workflowcode: "BLD-001",
+    version:1,
     published: "yes",
     status: true,
   },
@@ -26,6 +28,7 @@ const initialWorkflows = [
     name: "Leave Application Workflow",
     workflowtype: "Leave",
     workflowcode: "LEV-001",
+    version:1,
     published: "No",
     status: true,
   },
@@ -34,6 +37,7 @@ const initialWorkflows = [
     name: "Grievance Redressal Workflow",
     workflowtype: "Greivance",
     workflowcode: "GRV-001",
+    version:2,
     published: "yes",
     status: true,
   },
@@ -42,18 +46,57 @@ const initialWorkflows = [
     name: "Trade Licence Workflow",
     workflowtype: "Trade Licence",
     workflowcode: "TRD-001",
+    version:1,
     published: "yes",
     status: true,
   },
+   {
+    id: 6,
+    name: "Trade Licence Workflow",
+    workflowtype: "Trade Licence",
+    workflowcode: "TRD-001",
+    version:1,
+    published: "yes",
+    status: true,
+  },
+   {
+    id: 7,
+    name: "Trade Licence Workflow",
+    workflowtype: "Trade Licence",
+    workflowcode: "TRD-001",
+    version:1,
+    published: "yes",
+    status: true,
+  },
+   {
+    id: 8,
+    name: "Trade Licence Workflow",
+    workflowtype: "Trade Licence",
+    workflowcode: "TRD-001",
+    version:1,
+    published: "yes",
+    status: true,
+  },
+   {
+    id: 9,
+    name: "Trade Licence Workflow",
+    workflowtype: "Trade Licence",
+    workflowcode: "TRD-001",
+    version:1,
+    published: "yes",
+    status: true,
+  },
+  
 ];
 
 export default function WorkflowMasterMain() {
   const [search, setSearch] = useState("");
   const [workflows, setWorkflows] = useState(initialWorkflows);
   const [showModal, setShowModal] = useState(false);
+  const [entriesPerPage, setEntriesPerPage] = useState(5);
 
   // Clean, immutable toggle handler function
-  const handleToggle = (id) => {
+  const handletoggle = (id) => {
     setWorkflows((prevWorkflows) =>
       prevWorkflows.map((item) =>
         item.id === id ? { ...item, status: !item.status } : item
@@ -73,7 +116,7 @@ export default function WorkflowMasterMain() {
           className="flex items-center gap-2 bg-blue-600 text-white px-6 py-2.5 rounded-xl font-semibold shadow hover:bg-blue-700 hover:scale-105 transition-all duration-300"
         >
           <span className="text-xl">+</span>
-          <span>Add</span>
+          <span>Add Workflow</span>
         </button>
       </div>
 
@@ -81,7 +124,9 @@ export default function WorkflowMasterMain() {
       <WorkflowTable
         search={search}
         workflows={workflows}
-        workflowtoggle={handleToggle}
+        workflowtoggle={handletoggle}
+        entriesPerPage={entriesPerPage}       
+        setEntriesPerPage={setEntriesPerPage}
       />
 
       {/* Modal View Block */}
@@ -173,7 +218,7 @@ export default function WorkflowMasterMain() {
                 {/* 5. Published Status (Right) */}
                 <div className="col-span-1">
                   <label className="block text-xs font-semibold mb-1.5 text-slate-700">
-                    Published <span className="text-red-500">*</span>
+                    Published <span className="text-red-700">*</span>
                   </label>
                   <select className="w-full border border-slate-200 rounded-lg p-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-500">
                     <option>No</option>
