@@ -10,21 +10,13 @@ export default function Footer() {
       </div>
 
       {/* Right Side */}
-      <div className="flex items-center gap-2">
         
-        <button className="px-4 py-2 border border-gray-300 rounded-lg bg-white text-slate-700 hover:bg-gray-50 transition-colors">
-          previous
-        </button>
-
-        <button className="px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold">
-          1
-        </button>
-
-        <button className="px-4 py-2 border border-gray-300 rounded-lg bg-white text-slate-700 hover:bg-gray-50 transition-colors">
-          next
-        </button>
-
+         <div className="flex items-center gap-1.5">
+          <button className="px-3 py-1.5 border border-slate-200 rounded-lg bg-white text-slate-600 hover:bg-slate-50 shadow-sm">‹</button>
+          <button className="px-3.5 py-1.5 bg-blue-600 text-white rounded-lg font-bold shadow-md shadow-blue-500/20">1</button>
+          <button className="px-3 py-1.5 border border-slate-200 rounded-lg bg-white text-slate-600 hover:bg-slate-50 shadow-sm">›</button>
+        </div>
       </div>
-    </div>
+
   );
 }
