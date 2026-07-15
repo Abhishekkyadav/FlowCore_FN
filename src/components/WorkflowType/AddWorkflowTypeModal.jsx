@@ -3,7 +3,7 @@ import React from 'react';
 export default function AddWorkflowTypeModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
-  return (
+  return ( 
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* 1. Dark Blurred Background Overlay */}
       <div 
