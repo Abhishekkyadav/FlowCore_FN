@@ -52,10 +52,10 @@ export default function WorkflowTypeTable({ pageSize }) {
               <th onClick={() => handleSort('type')} className="py-4.5 px-5 cursor-pointer select-none hover:text-slate-900">
                 Workflow Type {sortOrder === 'asc' ? '▲' : '▼'}
               </th>
-              <th className="py-4.5 px-5">Workflow Type</th>
-              <th className="py-4.5 px-5 text-center">Version</th>
+              <th className="py-4.5 px-5">Version</th>
               <th className="py-4.5 px-5 text-center">Published</th>
               <th className="py-4.5 px-5 text-center">Status</th>
+            
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 text-sm text-slate-600">
