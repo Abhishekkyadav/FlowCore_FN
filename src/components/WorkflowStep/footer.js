@@ -10,13 +10,42 @@ export default function Footer() {
       </div>
 
       {/* Right Side */}
-        
-         <div className="flex items-center gap-1.5">
-          <button className="px-3 py-1.5 border border-slate-200 rounded-lg bg-white text-slate-600 hover:bg-slate-50 shadow-sm">‹</button>
-          <button className="px-3.5 py-1.5 bg-blue-600 text-white rounded-lg font-bold shadow-md shadow-blue-500/20">1</button>
-          <button className="px-3 py-1.5 border border-slate-200 rounded-lg bg-white text-slate-600 hover:bg-slate-50 shadow-sm">›</button>
-        </div>
-      </div>
+       <div className="flex items-center gap-2">
+
+  <button className="px-3 py-1.5 border border-slate-200 rounded-lg bg-white text-slate-600 shadow-sm transition-all duration-200 hover:bg-blue-600 hover:text-white hover:border-blue-600">
+    First
+  </button>
+
+  <button className="px-3 py-1.5 border border-slate-200 rounded-lg bg-white text-slate-600 shadow-sm transition-all duration-200 hover:bg-blue-600 hover:text-white hover:border-blue-600">
+    ‹ Prev
+  </button>
+
+  <button className="w-9 h-9 border border-slate-200 rounded-lg bg-white text-slate-600 shadow-sm transition-all duration-200 hover:bg-blue-600 hover:text-white hover:border-blue-600">
+    1
+  </button>
+
+  <button className="w-9 h-9 border border-slate-200 rounded-lg bg-white text-slate-600 shadow-sm transition-all duration-200 hover:bg-blue-600 hover:text-white hover:border-blue-600">
+    2
+  </button>
+
+  <button className="w-9 h-9 border border-slate-200 rounded-lg bg-white text-slate-600 shadow-sm transition-all duration-200 hover:bg-blue-600 hover:text-white hover:border-blue-600">
+    3
+  </button>
+
+  <button className="w-9 h-9 border border-slate-200 rounded-lg bg-white text-slate-600 shadow-sm transition-all duration-200 hover:bg-blue-600 hover:text-white hover:border-blue-600">
+    4
+  </button>
+
+  <button className="px-3 py-1.5 border border-slate-200 rounded-lg bg-white text-slate-600 shadow-sm transition-all duration-200 hover:bg-blue-600 hover:text-white hover:border-blue-600">
+    Next ›
+  </button>
+
+  <button className="px-3 py-1.5 border border-slate-200 rounded-lg bg-white text-slate-600 shadow-sm transition-all duration-200 hover:bg-blue-600 hover:text-white hover:border-blue-600">
+    Last
+  </button>
+
+</div>
+</div>
 
   );
 }
