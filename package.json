@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@remixicon/react": "^4.9.0",
+    "lucide-react": "^1.24.0",
     "remixicon-react": "^1.0.0"
   }
 }
