@@ -17,12 +17,95 @@ export default function WorkflowMasterMain() {
     });
 
     const [workflows, setWorkflows] = useState([
-        { id: 1, name: "Trade License Workflow", workflowcode: "TRD-001", workflowtype: "Trade License", version: "1", published: "Yes", status: true },
-        { id: 2, name: "Citizen Petition Workflow", workflowcode: "PET-001", workflowtype: "Petition", version: "1", published: "Yes", status: true },
-        { id: 3, name: "Leave Application Workflow", workflowcode: "LEV-001", workflowtype: "Leave", version: "1", published: "No", status: true },
-        { id: 4, name: "Grievance Redressal Workflow", workflowcode: "GRV-001", workflowtype: "Grievance", version: "2", published: "Yes", status: true },
-        { id: 5, name: "Document Verification", workflowcode: "DOC-001", workflowtype: "Verification", version: "1", published: "Yes", status: true },
-        { id: 6, name: "Building Permission Workflow", workflowcode: "BLD-001", workflowtype: "Building Permission", version: "1", published: "Yes", status: true },
+        { 
+            id: 1, 
+            name: "Trade License Workflow", 
+            workflowcode: "TRD-001",
+            workflowtype: "Trade License", 
+            version: "1", published: "Yes", 
+            status: true },
+        { 
+            id: 2, 
+            name: "Citizen Petition Workflow", 
+            workflowcode: "PET-001", 
+            workflowtype: "Petition", 
+            version: "1", 
+            published: "Yes", 
+            status: true },
+        { 
+            id: 3, 
+            name: "Leave Application Workflow", 
+            workflowcode: "LEV-001", 
+            workflowtype: "Leave", 
+            version: "1", 
+            published: "No", 
+            status: true },
+        { 
+            id: 4, 
+            name: "Grievance Redressal Workflow", 
+            workflowcode: "GRV-001", 
+            workflowtype: "Grievance", 
+            version: "2", 
+            published: "Yes", 
+            status: true },
+        { 
+            id: 5, 
+            name: "Document Verification", 
+            workflowcode: "DOC-001", 
+            workflowtype: "Verification", 
+            version: "1", 
+            published: "Yes", 
+            status: true },
+        { 
+            id: 6, 
+            name: "Building Permission Workflow", 
+            workflowcode: "BLD-001", 
+            workflowtype: "Building Permission", 
+            version: "1", 
+            published: "Yes", 
+            status: true },
+
+        { 
+            id: 7, 
+            name: "Property Tax Assessment", 
+            workflowcode: "PTX-001", 
+            workflowtype: "Property Tax", 
+            version: 1, 
+            published: true, 
+            status: true },
+        { 
+            id: 8, 
+            name: "Water Connection Request", 
+            workflowcode: "WTR-001", 
+            workflowtype: "Utility Services", 
+            version: 1, 
+            published: true, 
+            status: true },
+        { 
+            id: 9, 
+            name: "Vendor Registration", 
+            workflowcode: "VND-001", 
+            workflowtype: "Procurement", 
+            version: 2, 
+            published: true, 
+            status: false },
+        { 
+            id: 10, 
+            name: "No Objection Certificate", 
+            workflowcode: "NOC-001", 
+            workflowtype: "Certification", 
+            version: 1, 
+            published: false, 
+            status: true },
+        { 
+            id: 11, 
+            name: "Birth Certificate Application", 
+            workflowcode: "BRT-001", 
+            workflowtype: "Registry", 
+            version: 1, 
+            published: true, 
+            isActive: true },
+        
     ]);
 
     const handleToggle = (id) => {

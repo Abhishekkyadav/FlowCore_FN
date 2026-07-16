@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"; 
 
 // 1. Capitalized function name so React recognizes it as a component
-export default function workflowTable({
-    search,
-    workflows,
+export default function WorkflowTable({
+    search = "",
+    workflows = [],
     workflowtoggle,
     entriesPerPage,    
     setEntriesPerPage
@@ -11,11 +11,11 @@ export default function workflowTable({
 
     const [sortField, setSortField] = useState("");
     const [sortDirection, setSortDirection] = useState("asc");
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(100);
 
     // 2. Reset to page 1 whenever the user types in the search box
     useEffect(() => {
-        setCurrentPage(1);
+        setCurrentPage(100);
     }, [search]);
 
     const handleSort = (field) => {
@@ -27,9 +27,10 @@ export default function workflowTable({
         }
     };
 
+    // Added optional chaining (?.) to prevent runtime crashes if keys are missing
     const filteredworkflows = workflows.filter((workflow) =>
-         workflow.name.toLowerCase().includes(search.toLowerCase()) ||
-         workflow.workflowcode.toLowerCase().includes(search.toLowerCase())
+         workflow?.name?.toLowerCase().includes(search.toLowerCase()) ||
+         workflow?.workflowcode?.toLowerCase().includes(search.toLowerCase())
     ); 
 
     const sortedWorkflows = [...filteredworkflows].sort((a, b) => {
@@ -124,7 +125,6 @@ export default function workflowTable({
                         ) : (
                             currentDisplayedWorkflows.map((workflow, index) => (
                                 <tr key={workflow.id} className="hover:bg-slate-50/50 transition">
-                                    {/* Updated py-4.5 to py-4 for standard Tailwind compatability */}
                                     <td className="px-6 py-4 text-sm text-slate-400 font-medium">
                                         {indexOfFirstEntry + index + 1}
                                     </td>
@@ -133,15 +133,22 @@ export default function workflowTable({
                                     <td className="px-6 py-4 text-sm text-slate-500 font-medium">{workflow.workflowtype}</td>
                                     <td className="px-6 py-4 text-sm text-slate-800 font-bold">{workflow.version}</td>
                                     
-                                    {/* Published badge */}
+                                   {/* Published badge */}
                                     <td className="px-6 py-4 text-center">
-                                        <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold ${
-                                            workflow.published.toLowerCase() === "yes"
-                                                ? "bg-emerald-50 text-emerald-600 border border-emerald-200/50"
-                                                : "bg-rose-50 text-rose-600 border border-rose-200/50"
-                                        }`}>
-                                            {workflow.published.toLowerCase() === "yes" ? "✓ Yes" : "✕ No"}
-                                        </span>
+                                        {(() => {
+                                        // Safe check: Convert to string, lowercase it, and check if it means "yes" or true
+                                            const isPublished = workflow?.published?.toString().toLowerCase() === "yes" || workflow?.published === true;
+        
+                                            return (
+                                                <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold ${
+                                                    isPublished
+                                                    ? "bg-emerald-50 text-emerald-600 border border-emerald-200/50"
+                                                    : "bg-rose-50 text-rose-600 border border-rose-200/50"
+                                                    }`}>
+                                                        {isPublished ? "✓ Yes" : "✕ No"}
+                                                </span>
+                                            );
+                                        })()}
                                     </td>
 
                                     {/* Toggle switch */}
@@ -150,11 +157,10 @@ export default function workflowTable({
                                             <label className="relative inline-flex items-center cursor-pointer group">
                                                 <input
                                                     type="checkbox"
-                                                    checked={workflow.status}
-                                                    onChange={() => workflowtoggle(workflow.id)} 
+                                                    checked={workflow.status || false}
+                                                    onChange={() => workflowtoggle && workflowtoggle(workflow.id)} 
                                                     className="sr-only peer"
                                                 />
-                                                {/* Updated h-5.5 to h-6 for standard Tailwind compatibility */}
                                                 <div className="w-10 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600 group-hover:scale-105 transition-transform"></div>
                                             </label>
                                         </div>
