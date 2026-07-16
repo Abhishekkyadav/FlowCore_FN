@@ -1,62 +1,62 @@
 "use client";
 import {useState} from "react";
   import {
-  Menu,
-  ChevronDown,
-  ChevronRight,
-  Scan,
-  Workflow,
-  GitBranch,
-  UserRound,
-  FileText,
-  ContactRound,
-  UsersRound,
-  Network,
-  Settings,
-  ClipboardList,
-  SquareCheckBig,
-  Database,
-  ScanLine,
-  FileUp,
-  Bell,
-  MessageCircle,
-  History,
-} from "lucide-react";
+    RiMenuLine,
+  RiGitMergeLine,
+  RiNodeTree,
+  RiGitBranchLine,
+  RiCornerDownRightLine,
+  RiUserSettingsLine,
+  RiFileShieldLine,
+  RiUserSharedLine,
+  RiSettings4Line,
+  RiFileSettingsLine,
+  RiFileList3Line,
+  RiFileUploadLine,
+  RiNotification4Line,
+  RiDatabase2Line,
+  RiChat3Line,
+  RiCheckboxMultipleLine,
+  RiShieldCheckLine,
+  RiHistoryLine,
+  RiArrowDownSLine,
+  RiArrowRightSLine,
+} from "@remixicon/react";
 
 const workflowItems  = [
-  { name: "Workflow Type", icon: Scan },
-  { name: "Workflow", icon: Workflow },
-  { name: "Workflow Step", icon: Scan },
-  { name: "Workflow Transition", icon: GitBranch },
+  { name: "Workflow Type", icon: RiGitMergeLine },
+  { name: "Workflow", icon: RiNodeTree },
+  { name: "Workflow Step", icon: RiGitBranchLine },
+  { name: "Workflow Transition", icon: RiCornerDownRightLine },
 ];
 const permissionItems = [
-  { name: "Task Permission", icon: UserRound },
-  { name: "Assignment Rule", icon: ContactRound },
+  { name: "Task Permission", icon: RiUserSettingsLine },
+  { name: "Assignment Rule", icon: RiFileShieldLine },
 ];
 const hierarchyItems = [
-  { name: "Hierarchy Node", icon: UsersRound },
-  { name: "User Hierarchy Mapping", icon: Network },
-  { name: "Workflow Settings", icon: Settings },
+  { name: "Hierarchy Node", icon: RiNodeTree },
+  { name: "User Hierarchy Mapping", icon: RiUserSharedLine },
+  { name: "Workflow Settings", icon: RiSettings4Line },
 ];
 const documentItems = [
-  { name: "Document Configuration", icon: FileText },
+  { name: "Document Configuration", icon: RiFileSettingsLine },
 ];
 
 const fileItems = [
-  { name: "File Instance", icon: ClipboardList },
-  { name: "File Pool", icon: Database },
-  { name: "Uploaded Document", icon: FileUp },
+  { name: "File Instance", icon: RiFileList3Line },
+  { name: "File Pool", icon: RiDatabase2Line },
+  { name: "Uploaded Document", icon: RiFileUploadLine },
 ];
 const communicationItems = [
-  { name: "Notification", icon: Bell },
-  { name: "Comment", icon: MessageCircle },
+  { name: "Notification", icon: RiNotification4Line },
+  { name: "Comment", icon: RiChat3Line },
 ];
 const taskItems = [
-  { name: "Task Instance", icon: SquareCheckBig },
+  { name: "Task Instance", icon: RiCheckboxMultipleLine },
 ];
 const trackingItems = [
-  { name: "Audit Log", icon: History },
-   { name: "Movement History", icon: ScanLine },
+  { name: "Audit Log", icon: RiShieldCheckLine },
+   { name: "Movement History", icon: RiHistoryLine },
 ];
 export default function Sidebar({ isOpen, onToggle}) {
   const [workflowOpen, setWorkflowOpen] = useState(false);
@@ -77,8 +77,8 @@ const [communicationOpen, setCommunicationOpen] = useState(false);
         key={item.name}
         type="button"
         className="
-          flex h-[56px] w-full items-center gap-[17px]
-          rounded-[9px] px-[17px]
+          flex h-[44px] w-full items-center gap-[10px]
+          rounded-[8px] px-[10px]
           text-left text-[#344261]
           transition-colors duration-150
           hover:bg-[#F6F8FC]
@@ -86,15 +86,15 @@ const [communicationOpen, setCommunicationOpen] = useState(false);
       >
         <span
           className="
-            flex h-[29px] w-[29px] shrink-0
+            flex h-[20px] w-[20px] shrink-0
             items-center justify-center
             rounded-[6px] text-[#405170]
           "
         >
-          <Icon size={22} strokeWidth={1.8} />
+          <Icon size={17} />
         </span>
 
-        <span className="whitespace-nowrap text-[16px] font-medium leading-[22px]">
+        <span className="whitespace-nowrap text-[14px] font-medium leading-[22px]">
           {item.name}
         </span>
       </button>
@@ -119,14 +119,14 @@ const [communicationOpen, setCommunicationOpen] = useState(false);
         </span>
 
         {open ? (
-          <ChevronDown size={20} />
+          <RiArrowDownSLine size={18} />
         ) : (
-          <ChevronRight size={20} />
+          <RiArrowRightSLine size={18} />
         )}
       </button>
 
       {open && (
-        <div className="ml-[14px] border-l border-[#E5E9F1] pl-[8px]">
+        <div className="ml-[8px] border-l border-[#E5E9F1] pl-[4px]">
           {items.map(renderMenuItem)}
         </div>
       )}
@@ -143,23 +143,23 @@ const [communicationOpen, setCommunicationOpen] = useState(false);
           transition-all duration-300 ease-in-out
           ${
             isOpen
-              ? "w-[340px] min-w-[340px] translate-x-0 opacity-100"
+              ? "w-[245px] min-w-[245px] translate-x-0 opacity-100"
               : "w-0 min-w-0 -translate-x-full opacity-0"
           }
         `}
         >
       <header
   className="
-    flex h-[132px] items-center justify-between
+    flex h-[84px] items-center justify-between
     border-b border-[#EDF0F5]
-    px-[32px]
+    px-[14px]
   "
 >
-  <div className="flex items-center gap-4">
+  <div className="flex items-center gap-2">
 
     <svg
-      width="48"
-      height="56"
+      width="36"
+      height="42"
       viewBox="0 0 48 56"
       fill="none"
     >
@@ -185,11 +185,11 @@ const [communicationOpen, setCommunicationOpen] = useState(false);
     </svg>
 
     <div>
-      <h1 className="text-[25px] font-extrabold text-[#101318]">
+      <h1 className="text-[18px] font-extrabold text-[#101318]">
         FLOWCORE
       </h1>
 
-      <p className="text-[16px] text-[#344261]">
+      <p className="text-[12px] text-[#344261]">
         Workflow Engine
       </p>
     </div>
@@ -200,13 +200,13 @@ const [communicationOpen, setCommunicationOpen] = useState(false);
     type="button"
     onClick={onToggle}
     className="
-      flex h-10 w-10
+      flex h-8 w-8
       items-center justify-center
       rounded-lg
       hover:bg-gray-100
     "
   >
-    <Menu size={24}/>
+    <RiMenuLine size={18}/>
   </button>
 
 </header>
@@ -324,7 +324,7 @@ const [communicationOpen, setCommunicationOpen] = useState(false);
       transition
     "
   >
-    <Settings size={24} strokeWidth={1.9} />
+    <RiSettings4Line size={20} />
     <span>Settings</span>
   </button>
 </div>
@@ -347,7 +347,7 @@ const [communicationOpen, setCommunicationOpen] = useState(false);
             hover:bg-[#F3F5F9]
           "
         >
-          <Menu size={26} strokeWidth={2} />
+          <RiMenuLine size={18}  />
         </button>
       )}
     </>
