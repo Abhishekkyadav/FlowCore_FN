@@ -59,7 +59,7 @@ export default function WorkflowMasterMain() {
 
     return (
         <div className="min-h-screen bg-[#f3f4f6] p-6 font-sans relative">
-            <div className="max-w-[1400px] mx-auto space-y-5">
+            <div className="max-w-full mx-auto space-y-5">
                 
                 {/* Header Card */}
                 <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex justify-between items-center">
