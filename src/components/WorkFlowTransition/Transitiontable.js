@@ -171,13 +171,30 @@ const handleSort = (key) => {
                     {item.ToStepId}
                   </td>
 
-                  <td className="px-6 py-4 border-b border-slate-200 text-align center text-[13px] text-slate-500 font-bold">
-                    {item.ActionCode}
-                  </td>
-
-                  <td className="px-6 py-4 border-b border-slate-200  text-align center text-[13px] text-slate-500 font-bold">
-                    {item.ActionName}
-                  </td>
+                 <td className="px-6 py-4 border-b border-slate-200">
+  <span
+    className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold
+      ${
+        item.ActionCode === "APPROVE"
+          ? "bg-green-100 text-green-700"
+          : "bg-red-100 text-red-700"
+      }`}
+  >
+    {item.ActionCode}
+  </span>
+</td>
+                  <td className="px-6 py-4 border-b border-slate-200">
+  <span
+    className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold
+      ${
+        item.ActionName === "APPROVE"
+          ? "bg-green-100 text-green-700"
+          : "bg-red-100 text-red-700"
+      }`}
+  >
+    {item.ActionName}
+  </span>
+</td>
                 </tr>
               ))}
             </tbody>
