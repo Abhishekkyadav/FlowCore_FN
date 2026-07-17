@@ -1,10 +1,10 @@
-import '../app/globals.css'; 
+import "../app/globals.css";
+import Layout from "../components/Layout";
 
-export default function App({ Component, pageProps }) {
-
+export default function MyApp({ Component, pageProps }) {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800">
+    <Layout>
       <Component {...pageProps} />
-    </div>
+    </Layout>
   );
 }

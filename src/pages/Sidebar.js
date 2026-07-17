@@ -6,10 +6,10 @@ export default function Home() {
 
   return (
     <div className="flex h-screen">
-      {/* <Sidebar
+      <Sidebar
         isOpen={isOpen}
         onToggle={() => setIsOpen(!isOpen)}
-      /> */}
+      />
     </div>
   );
 }
