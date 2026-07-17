@@ -103,71 +103,57 @@ export default function Table({ permissions, onToggle, searchTerm, pageSize }) {
       
       
       
-      {/* Footer Meta Pagination Controls */}
-      <div className="flex items-center justify-between text-[11px] text-slate-400 font-medium pt-3 px-1">
-        <span>
-          Showing {sortedData.length === 0 ? 0 : indexOfFirstRow + 1} to {Math.min(indexOfLastRow, sortedData.length)} of {sortedData.length} entries
-        </span>
+      
+      {/* Pagination Footer */}
+      <div className="flex items-center justify-end gap-1 text-[13px] text-slate-700 font-normal mt-4 bg-slate-50/50 p-3 rounded-xl border border-slate-100">
         
-        <div className="flex items-center gap-2 text-[11px]">
-          {/* First Button */}
+        {/* First Button */}
+        <button 
+          onClick={() => setCurrentPage(1)} 
+          className="px-2.5 py-1 text-slate-500 hover:text-slate-900 transition-colors"
+        >
+          First
+        </button>
+        
+        {/* Prev Button */}
+        <button 
+          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} 
+          className="px-2.5 py-1 text-slate-500 hover:text-slate-900 transition-colors mr-2"
+        >
+          ‹ Prev
+        </button>
+        
+        {/* 1 se lekar 4 tak ke Numbers  */}
+        {[1, 2, 3, 4 ].map((pageNumber) => (
           <button 
-            type="button" 
-            disabled={currentPage === 1} 
-            onClick={() => setCurrentPage(1)} 
-            className={`px-1 py-1 transition-all ${currentPage === 1 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-500 hover:text-indigo-600'}`}
+            key={pageNumber} 
+            onClick={() => setCurrentPage(pageNumber)}
+            className={`px-3 py-1 text-center rounded transition-all min-w-[28px] ${
+              currentPage === pageNumber 
+                ? 'bg-blue-600 text-white font-medium shadow-sm' 
+                : 'text-slate-600 hover:bg-slate-100'
+            }`}
           >
-            First
+            {pageNumber}
           </button>
+        ))}
 
-          {/* Prev Button */}
-          <button 
-            type="button" 
-            disabled={currentPage === 1} 
-            onClick={() => setCurrentPage(currentPage - 1)} 
-            className={`px-1 py-1 transition-all ${currentPage === 1 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-500 hover:text-indigo-600'}`}
-          >
-            ‹ Prev
-          </button>
+        {/* Next Button */}
+        <button 
+          onClick={() => setCurrentPage(prev => Math.min(prev + 1, 7))} 
+          className="px-2.5 py-1 text-slate-500 hover:text-slate-900 transition-colors ml-2"
+        >
+          Next ›
+        </button>
+        
+        {/* Last Button */}
+        <button 
+          onClick={() => setCurrentPage(7)} 
+          className="px-2.5 py-1 text-slate-500 hover:text-slate-900 transition-colors"
+        >
+          Last
+        </button>
 
-          {/* Clean Number Sequence Buttons (Direct 1 2 3 4, No dots!) */}
-          <div className="flex items-center gap-2">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <button
-                key={page}
-                type="button"
-                onClick={() => setCurrentPage(page)}
-                className={`w-7 h-7 flex items-center justify-center rounded-lg font-bold text-xs transition-all ${
-                  currentPage === page
-                    ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-500/10' // Active solid filled state
-                    : 'text-slate-500 hover:bg-slate-100/50 hover:text-indigo-600' // Inactive numbers
-                }`}
-              >
-                {page}
-              </button>
-            ))}
-          </div>
-
-          {/* Next Button */}
-          <button 
-            type="button" 
-            disabled={currentPage === totalPages || totalPages === 0} 
-            onClick={() => setCurrentPage(currentPage + 1)} 
-            className={`px-1 py-1 transition-all ${currentPage === totalPages || totalPages === 0 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-500 hover:text-indigo-600'}`}
-          >
-            Next ›
-          </button>
-
-          {/* Last Button */}
-          <button 
-            type="button" 
-            disabled={currentPage === totalPages || totalPages === 0} 
-            onClick={() => setCurrentPage(totalPages)} 
-            className={`px-1 py-1 transition-all ${currentPage === totalPages || totalPages === 0 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-500 hover:text-indigo-600'}`}
-          >
-            Last
-          </button>
-        </div>
       </div>
     </div>
   );
