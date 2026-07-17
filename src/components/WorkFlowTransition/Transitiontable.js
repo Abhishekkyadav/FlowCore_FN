@@ -76,7 +76,7 @@ const handleSort = (key) => {
     <div className="p-6 bg-[#f5f7fb] min-h-screen font-sans text-slate-700">
       <div className="bg-white rounded-2xl shadow-md overflow-hidden">
         {/* Header */}
-       <Header/>
+       <Header  />
         {/* Search Section */}
         <div className="px-6 py-5 border-b border-gray-200 ">
           <div className="flex justify-between items-center flex-wrap gap-3">
