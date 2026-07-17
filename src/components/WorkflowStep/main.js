@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Footer from "./footer.js";
 import Link from "next/link";
-import AddWorkflowStepModal from "../AddWorkflowStepModal.js";
+import AddWorkflowStepModal from "./AddWorkflowStepModal.js";
 
 const workflowSteps = [
   {
@@ -73,6 +73,29 @@ const workflowSteps = [
 
 export default function WorkflowStep() {
   const [showModal, setShowModal] = useState(false);
+  const [pageSize, setPageSize] = useState(5);
+  // code for the sorting of table headings
+  const [sortConfig, setSortConfig] = useState({
+  key: "",
+  direction: "asc",
+});
+const handleSort = (key) => {
+  let direction = "asc";
+
+  if (
+    sortConfig.key === key &&
+    sortConfig.direction === "asc"
+  ) {
+    direction = "desc";
+  }
+
+  setSortConfig({
+    key,
+    direction,
+  });
+
+  // Sorting logic can be added later when API comes
+};
 
   return (
     <div className="p-6 bg-[#f5f7fb] min-h-screen font-sans text-slate-700">
@@ -114,12 +137,27 @@ export default function WorkflowStep() {
               placeholder="Search workflow step..."
               className="w-[300px] px-4 py-2.5 border border-slate-200/80 rounded-lg text-[13px] text-slate-600 focus:outline-none bg-slate-50"
             />
+            {/* Show Entries */}
+      <div className="px-4 py-3 border-b border-slate-200 text-[13px] text-slate-500 font-bold">
+        <span>Show</span>
+
+        <select
+          value={pageSize}
+          onChange={(e) => setPageSize(Number(e.target.value))}
+          className="inline-flex item-center px-3 py-1 rounded-md bg-[#f1f5f9] text-[#334155] text-xs font-semibold border border-[#e2e8f0]">
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={25}>25</option>
+        </select>
+
+        <span>entries</span>
+      </div>
 
             <button
               onClick={() => setShowModal(true)}
               className="px-5 py-2.5 bg-blue-600 text-white rounded-lg text-[13px] font-semibold hover:bg-blue-700 transition-colors"
             >
-              + Add Workflow Type
+              + Add Workflow Step
             </button>
           </div>
         </div>
@@ -127,33 +165,49 @@ export default function WorkflowStep() {
         {/* Table */}
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">
-            <thead>
-              <tr className="bg-slate-50/70 border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-500">
-                {[
-                  "WorkflowStepId",
-                  "WorkflowId",
-                  "StepCode",
-                  "StepName",
-                  "SequenceNo",
-                  "SLA Type",
-                  "SLA Value",
-                  "Reminder Before",
-                  "Escalation After",
-                  "Working Hours Only",
-                  "Exclude Holidays",
-                ].map((heading) => (
-                  <th
-                    key={heading}
-                    className="px-4 py-3 text-left border-b border-gray-200 text-[11px] font-bold uppercase tracking-wider text-slate-500"
-                  >
-                    {heading}
-                  </th>
-                ))}
-              </tr>
-            </thead>
+           
+<thead>
+  <tr className="bg-slate-50/70 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-500">
 
+    {[
+      { label: "WorkflowStepId", key: "workflowStepId" },
+      { label: "WorkflowId", key: "workflowId" },
+      { label: "StepCode", key: "stepCode" },
+      { label: "StepName", key: "stepName" },
+      { label: "SequenceNo", key: "sequenceNo" },
+      { label: "SLA Type", key: "slaType" },
+      { label: "SLA Value", key: "slaValue" },
+      { label: "Reminder Before", key: "reminderBefore" },
+      { label: "Escalation After", key: "escalationAfter" },
+      { label: "Working Hours Only", key: "workingHoursOnly" },
+      { label: "Exclude Holidays", key: "excludeHolidays" },
+    ].map((column) => (
+      <th
+        key={column.key}
+        onClick={() => handleSort(column.key)}
+        className="px-4 py-3 text-left border-b border-gray-200 text-[11px] font-bold uppercase tracking-wider text-slate-500">
+        <div className="flex items-center gap-2">
+          <span>{column.label}</span>
+
+          <span className="text-gray-400 text-xs">
+            {sortConfig.key === column.key ? (
+              sortConfig.direction === "asc" ? (
+                "▲"
+              ) : (
+                "▼"
+              )
+            ) : (
+              "↕"
+            )}
+          </span>
+        </div>
+      </th>
+    ))}
+
+  </tr>
+</thead>
             <tbody>
-              {workflowSteps.map((item) => (
+              {workflowSteps.slice(0,pageSize).map((item) => (
                 <tr
                   key={item.workflowStepId}
                   className="hover:bg-slate-50 transition-colors"
