@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import SearchBar from '../components/WorkflowType/SearchBar';
-import WorkflowTypeTable from '../components/WorkflowType/WorkflowTypeTable';
-import AddWorkflowTypeModal from '../components/WorkflowType/AddWorkflowTypeModal';
-import AddButton from '../components/WorkflowType/AddButton';
+import SearchBar from './SearchBar';
+import WorkflowTypeTable from './WorkflowTypeTable';
+import AddWorkflowTypeModal from './AddWorkflowTypeModal';
+import AddButton from './AddButton';
 
-export default function WorkflowTypePage() {
+export default function WorkflowTypeMains() {
   const [modalOpen, setModalOpen] = useState(false);
   
   // 1. Ek simple state banayi rows count store karne ke liye (Default 10)

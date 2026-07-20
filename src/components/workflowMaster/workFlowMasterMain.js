@@ -1,5 +1,5 @@
 import { useState } from "react";
-import WorkflowTable from "./WorkflowTable"; // Make sure this is capitalized!
+import WorkflowTable from "./workflowTable";
 
 export default function WorkflowMasterMain() {
     const [search, setSearch] = useState("");
@@ -195,7 +195,7 @@ export default function WorkflowMasterMain() {
                     </div>
 
                     {/* The Inner Table Wrapper */}
-                    <WorkflowTable 
+                    <WorkflowTable
                         search={search}
                         workflows={workflows}
                         workflowtoggle={handleToggle}

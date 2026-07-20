@@ -22,43 +22,57 @@ import {useState} from "react";
   RiArrowDownSLine,
   RiArrowRightSLine,
 } from "@remixicon/react";
+import { useRouter } from "next/router";
+import WorkflowMasterMain from "./workflowMaster/workFlowMasterMain";
+import WorkflowTypeMains from './WorkflowType/WorkflowTypeMains'
 
-const workflowItems  = [
-  { name: "Workflow Type", icon: RiGitMergeLine },
-  { name: "Workflow", icon: RiNodeTree },
-  { name: "Workflow Step", icon: RiGitBranchLine },
-  { name: "Workflow Transition", icon: RiCornerDownRightLine },
+import WorkflowStep from "./WorkflowStep/main";
+import WorkFlowTransition from "./WorkFlowTransition/Transitiontable";
+
+
+
+
+
+const workflowItems = [
+  { name: "Workflow Type", component: "workflowType", icon: RiGitMergeLine },
+  { name: "Workflow", component: "workflow", icon: RiNodeTree },
+  { name: "Workflow Step", component: "workflowStep", icon: RiGitBranchLine },
+  { name: "Workflow Transition", component: "workflowTransition", icon: RiCornerDownRightLine },
 ];
 const permissionItems = [
-  { name: "Task Permission", icon: RiUserSettingsLine },
-  { name: "Assignment Rule", icon: RiFileShieldLine },
+  { name: "Task Permission", path: "/TaskPermissionPage",icon: RiUserSettingsLine },
+  { name: "Assignment Rule", path: "/AssignmentRulePage",icon: RiFileShieldLine },
 ];
 const hierarchyItems = [
-  { name: "Hierarchy Node", icon: RiNodeTree },
-  { name: "User Hierarchy Mapping", icon: RiUserSharedLine },
-  { name: "Workflow Settings", icon: RiSettings4Line },
+  { name: "Hierarchy Node", path: "/WorkflowType",icon: RiNodeTree },
+  { name: "User Hierarchy Mapping", path: "/WorkflowType",icon: RiUserSharedLine },
+  { name: "Workflow Settings", path: "/WorkflowType",icon: RiSettings4Line },
 ];
 const documentItems = [
-  { name: "Document Configuration", icon: RiFileSettingsLine },
+  { name: "Document Configuration", path: "/WorkflowType",icon: RiFileSettingsLine },
 ];
 
 const fileItems = [
-  { name: "File Instance", icon: RiFileList3Line },
-  { name: "File Pool", icon: RiDatabase2Line },
-  { name: "Uploaded Document", icon: RiFileUploadLine },
+  { name: "File Instance", path: "/WorkflowType",icon: RiFileList3Line },
+  { name: "File Pool", path: "/WorkflowType",icon: RiDatabase2Line },
+  { name: "Uploaded Document", path: "/WorkflowType",icon: RiFileUploadLine },
 ];
 const communicationItems = [
-  { name: "Notification", icon: RiNotification4Line },
-  { name: "Comment", icon: RiChat3Line },
+  { name: "Notification", path: "/WorkflowType",icon: RiNotification4Line },
+  { name: "Comment", path: "/WorkflowType",icon: RiChat3Line },
 ];
 const taskItems = [
-  { name: "Task Instance", icon: RiCheckboxMultipleLine },
+  { name: "Task Instance", path: "/WorkflowType",icon: RiCheckboxMultipleLine },
 ];
 const trackingItems = [
-  { name: "Audit Log", icon: RiShieldCheckLine },
-   { name: "Movement History", icon: RiHistoryLine },
+  { name: "Audit Log", path: "/WorkflowType",icon: RiShieldCheckLine },
+   { name: "Movement History", path: "/WorkflowType",icon: RiHistoryLine },
 ];
-export default function Sidebar({ isOpen, onToggle}) {
+
+
+
+export default function Sidebar({ isOpen, onToggle,childrens}) {
+  const router = useRouter();
   const [workflowOpen, setWorkflowOpen] = useState(false);
 const [permissionOpen, setPermissionOpen] = useState(false);
 const [hierarchyOpen, setHierarchyOpen] = useState(false);
@@ -68,21 +82,29 @@ const [filesOpen, setFilesOpen] = useState(false);
 const [tasksOpen, setTasksOpen] = useState(false);
 const [trackingOpen, setTrackingOpen] = useState(false);
 const [communicationOpen, setCommunicationOpen] = useState(false);
+  const [activeComponent, setActiveComponent] = useState("workflowType");
 
-  const renderMenuItem = (item) => {
+  const renderMenuItemold = (item) => {
     const Icon = item.icon;
 
     return (
       <button
         key={item.name}
         type="button"
-        className="
-          flex h-[44px] w-full items-center gap-[10px]
-          rounded-[8px] px-[10px]
-          text-left text-[#344261]
-          transition-colors duration-150
-          hover:bg-[#F6F8FC]
-        "
+        className={`
+        flex h-[56px] w-full items-center gap-[17px]
+        rounded-[9px] px-[17px]
+        text-left transition-colors duration-150
+        ${
+          router.pathname === item.path
+            ? "bg-blue-50 text-blue-600"
+            : "text-[#344261] hover:bg-[#F6F8FC]"
+        }
+      `}
+    
+        
+        onClick={() => router.push(item.path)}
+
       >
         <span
           className="
@@ -100,6 +122,62 @@ const [communicationOpen, setCommunicationOpen] = useState(false);
       </button>
     );
   };
+  const renderMenuItem = (item) => {
+  const Icon = item.icon;
+const handleClick = () => {
+  if (item.component) {
+    // URL ko root kar do
+    router.push("/", undefined, { shallow: true });
+
+    // Component dikhao
+    setActiveComponent(item.component);
+  } else if (item.path) {
+    setActiveComponent(null);
+    router.push(item.path);
+  }
+};
+
+  return (
+    <button
+      key={item.name}
+      onClick={handleClick}
+      className={`
+        flex h-[56px] w-full items-center gap-[17px]
+        rounded-[9px] px-[17px]
+        ${
+          item.component
+            ? activeComponent === item.component
+              ? "bg-blue-50 text-blue-600"
+              : "text-[#344261] hover:bg-[#F6F8FC]"
+            : router.pathname === item.path
+            ? "bg-blue-50 text-blue-600"
+            : "text-[#344261] hover:bg-[#F6F8FC]"
+        }
+      `}
+    >
+      <Icon size={17} />
+      <span>{item.name}</span>
+    </button>
+  );
+};
+  const renderContent = () => {
+  switch (activeComponent) {
+    case "workflowType":
+      return <WorkflowTypeMains />;
+
+    case "workflow":
+      return <WorkflowMasterMain />;
+
+    case "workflowStep":
+      return <WorkflowStep />;
+
+    case "workflowTransition":
+      return <WorkFlowTransition />;
+
+    default:
+      return childrens;
+  }
+};
   const renderDropdown = (title, open, setOpen, items) => {
   return (
     <div className="mb-2">
@@ -330,6 +408,9 @@ const [communicationOpen, setCommunicationOpen] = useState(false);
 </div>
 
 </aside>
+<div className="flex-1 overflow-auto bg-[#F5F7FB]">
+  {renderContent()}
+</div>
 {!isOpen && (
         <button
           type="button"
